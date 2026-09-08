@@ -1,0 +1,4 @@
+interface:
+  display_name: "ChatGPT to Markdown"
+  short_description: "Clean copied ChatGPT replies into Markdown"
+  default_prompt: "Use $chatgpt-md to clean my current macOS clipboard into Markdown."
