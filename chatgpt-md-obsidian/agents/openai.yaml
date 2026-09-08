@@ -1,0 +1,4 @@
+interface:
+  display_name: "ChatGPT Markdown · Obsidian"
+  short_description: "清理 ChatGPT 剪贴板并输出 Obsidian 公式定界符"
+  default_prompt: "使用 $chatgpt-md-obsidian 清理当前 macOS 剪贴板，输出适用于 Obsidian 的 Markdown。"

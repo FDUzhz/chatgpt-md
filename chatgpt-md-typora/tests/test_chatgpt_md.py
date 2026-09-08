@@ -39,7 +39,7 @@ class ConversionTests(unittest.TestCase):
 
     def test_katex_annotation(self):
         source = '<span class="katex"><math><semantics><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span>'
-        self.assertIn("$E=mc^2$", mod.html_to_markdown(source))
+        self.assertIn(r"\(E=mc^2\)", mod.html_to_markdown(source))
 
     def test_dangerous_link_scheme_is_removed(self):
         result = mod.html_to_markdown('<a href="javascript:alert(1)">不要点击</a>')
@@ -55,28 +55,16 @@ class ConversionTests(unittest.TestCase):
             "正文中的 \\(x_i^2\\) 应显示为公式。\n\n"
             "• \\(h_{\\theta_e}(x)\\)：专家输出"
         )
-        expected = (
-            "# 2. $h_{\\theta_e}(x)$: 第 $e$ 个专家\n\n"
-            "正文中的 $x_i^2$ 应显示为公式。\n\n"
-            "- $h_{\\theta_e}(x)$：专家输出\n"
-        )
+        expected = source.replace("• ", "- ") + "\n"
         self.assertEqual(mod.clean_markdown(source), expected)
 
     def test_display_latex_delimiters(self):
         source = "推导如下：\n\\[\nE = mc^2\n\\]\n结束。"
-        self.assertEqual(mod.clean_markdown(source), "推导如下：\n\n$$\nE = mc^2\n$$\n\n结束。\n")
+        self.assertEqual(mod.clean_markdown(source), source + "\n")
 
     def test_latex_delimiters_inside_code_are_unchanged(self):
         source = "```text\n\\(not_math\\)\n```"
         self.assertEqual(mod.clean_markdown(source), source + "\n")
-
-    def test_typora_mode_preserves_plain_latex_delimiters(self):
-        source = "标题：\\(x_i^2\\)\n\\[E=mc^2\\]"
-        self.assertEqual(mod.clean_markdown(source, math_delimiters="backslash"), source + "\n")
-
-    def test_typora_mode_recovers_katex_with_backslash_delimiters(self):
-        source = '<span class="katex"><math><semantics><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span>'
-        self.assertEqual(mod.html_to_markdown(source, math_delimiters="backslash"), "\\(x_i\\)\n")
 
 
 if __name__ == "__main__":

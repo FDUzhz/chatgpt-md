@@ -19,7 +19,7 @@ BLOCK_TAGS = {"p", "div", "section", "article", "header", "footer", "main", "asi
 OSASCRIPT = "/usr/bin/osascript"
 PBCOPY = "/usr/bin/pbcopy"
 PBPASTE = "/usr/bin/pbpaste"
-DEFAULT_MATH_DELIMITERS = "dollar"
+DEFAULT_MATH_DELIMITERS = "backslash"
 
 
 def _safe_href(value: Optional[str]) -> Optional[str]:

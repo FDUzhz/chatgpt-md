@@ -1,0 +1,4 @@
+interface:
+  display_name: "ChatGPT Markdown · Typora"
+  short_description: "清理 ChatGPT 剪贴板并保留 Typora 公式定界符"
+  default_prompt: "使用 $chatgpt-md-typora 清理当前 macOS 剪贴板，输出适用于 Typora 的 Markdown。"

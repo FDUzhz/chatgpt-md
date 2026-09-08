@@ -70,14 +70,6 @@ class ConversionTests(unittest.TestCase):
         source = "```text\n\\(not_math\\)\n```"
         self.assertEqual(mod.clean_markdown(source), source + "\n")
 
-    def test_typora_mode_preserves_plain_latex_delimiters(self):
-        source = "标题：\\(x_i^2\\)\n\\[E=mc^2\\]"
-        self.assertEqual(mod.clean_markdown(source, math_delimiters="backslash"), source + "\n")
-
-    def test_typora_mode_recovers_katex_with_backslash_delimiters(self):
-        source = '<span class="katex"><math><semantics><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span>'
-        self.assertEqual(mod.html_to_markdown(source, math_delimiters="backslash"), "\\(x_i\\)\n")
-
 
 if __name__ == "__main__":
     unittest.main()
